@@ -1,0 +1,16 @@
+[server]
+host = "127.0.0.1"
+port = 3000
+
+[service]
+name = "mp-playground"
+greeting = "Hello from ${service.name}"
+
+[fault-tolerance]
+timeout = "250ms"
+max-retries = 2
+retry-delay = "25ms"
+bulkhead-size = 4
+circuit-request-volume = 4
+circuit-failure-ratio = 0.5
+circuit-delay = "1500ms"
