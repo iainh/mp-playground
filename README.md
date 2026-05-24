@@ -45,3 +45,5 @@ curl 'http://127.0.0.1:3000/inventory/abc?mode=slow'
   `mp-config` feature, removing the local policy-building glue.
 - `CircuitBreaker::health_check` now exposes circuit state as an `axum-health`
   readiness check behind the `axum-health` feature.
+- `mp-config-tracing` configures `tracing-subscriber` from the same
+  `application.toml` and environment source model.

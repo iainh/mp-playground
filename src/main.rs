@@ -1,14 +1,12 @@
-use mp_playground::build_app;
+use mp_config_tracing::TracingConfig;
+use mp_playground::{build_app_from_config, load_config_source};
 use std::net::SocketAddr;
-use tracing_subscriber::EnvFilter;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    tracing_subscriber::fmt()
-        .with_env_filter(EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()))
-        .init();
-
-    let app = build_app()?;
+    let config_source = load_config_source()?;
+    TracingConfig::from_config(&config_source)?.init()?;
+    let app = build_app_from_config(config_source)?;
     let address: SocketAddr = format!("{}:{}", app.config.server.host, app.config.server.port)
         .parse()
         .map_err(|error| format!("invalid server address in configuration: {error}"))?;

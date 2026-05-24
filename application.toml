@@ -6,6 +6,16 @@ port = 3000
 name = "mp-playground"
 greeting = "Hello from ${service.name}"
 
+[logging]
+filter = "info,mp_playground=debug"
+format = "compact"
+target = true
+thread-ids = false
+thread-names = false
+file = false
+line-number = false
+ansi = true
+
 [fault-tolerance]
 timeout = "250ms"
 max-retries = 2

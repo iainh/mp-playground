@@ -60,11 +60,18 @@ struct AppState {
     policy: FaultTolerance,
 }
 
-pub fn build_app() -> Result<App, Box<dyn std::error::Error>> {
-    let config_source = Config::builder()
+pub fn load_config_source() -> mp_config::Result<Config> {
+    Ok(Config::builder()
         .expressions(true)
         .add_default_toml_sources()?
-        .build();
+        .build())
+}
+
+pub fn build_app() -> Result<App, Box<dyn std::error::Error>> {
+    build_app_from_config(load_config_source()?)
+}
+
+pub fn build_app_from_config(config_source: Config) -> Result<App, Box<dyn std::error::Error>> {
     let config = Arc::new(AppConfig::from_config(&config_source)?);
     let circuit_breaker = config.fault_tolerance.build_circuit_breaker();
     let policy = match circuit_breaker.clone() {
