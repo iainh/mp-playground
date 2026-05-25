@@ -6,12 +6,14 @@ rust-version = "1.85"
 
 [dependencies]
 axum = { version = "0.8", features = ["json", "query", "tokio"] }
-axum-fault-tolerance = { path = "../axum-fault-tolerance", features = ["axum-health", "mp-config"] }
-axum-health = { path = "../axum-health" }
-mp-config = { path = "../mp-config" }
-mp-config-tracing = { path = "../mp-config-tracing" }
+axum-fault-tolerance = { git = "ssh://git@github.com/iainh/axum-fault-tolerance.git", features = ["axum-health", "mp-config"] }
+axum-health = { git = "ssh://git@github.com/iainh/axum-health.git" }
+mp-config = { git = "ssh://git@github.com/iainh/mp-config.git", tag = "v0.1.1" }
+mp-config-sqlx = { git = "ssh://git@github.com/iainh/mp-config-sqlx.git", default-features = false, features = ["runtime-tokio", "sqlite"] }
+mp-config-tracing = { git = "ssh://git@github.com/iainh/mp-config-tracing.git" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio", "sqlite"] }
 tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "signal", "time"] }
 tracing = "0.1"
 
