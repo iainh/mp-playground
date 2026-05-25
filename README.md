@@ -1,7 +1,8 @@
 # mp-playground
 
-Small Axum REST application that demonstrates using `../mp-config`,
-`../axum-health`, and `../axum-fault-tolerance` together.
+Small Axum REST application that demonstrates using the `mp-config`,
+`mp-config-sqlx`, `axum-health`, and `axum-fault-tolerance` git repositories
+together.
 
 ## Run
 
@@ -18,6 +19,8 @@ overrides `server.port`.
 - `GET /` returns the configured service name and available routes.
 - `GET /config` shows selected resolved config values and the source candidates
   considered for `server.port`.
+- `GET /database` reports a value queried from an in-memory SQLite datasource
+  configured through `mp-config-sqlx`.
 - `GET /inventory/:sku` calls a simulated upstream service through timeout,
   retry, circuit-breaker, bulkhead, and fallback policies.
 - `GET /circuit` reports the current circuit-breaker state.
@@ -45,5 +48,7 @@ curl 'http://127.0.0.1:3000/inventory/abc?mode=slow'
   `mp-config` feature, removing the local policy-building glue.
 - `CircuitBreaker::health_check` now exposes circuit state as an `axum-health`
   readiness check behind the `axum-health` feature.
+- `mp-config-sqlx` connects an in-memory SQLite datasource from the configured
+  default `datasource` block.
 - `mp-config-tracing` configures `tracing-subscriber` from the same
   `application.toml` and environment source model.

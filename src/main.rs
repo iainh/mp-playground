@@ -6,7 +6,7 @@ use std::net::SocketAddr;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config_source = load_config_source()?;
     TracingConfig::from_config(&config_source)?.init()?;
-    let app = build_app_from_config(config_source)?;
+    let app = build_app_from_config(config_source).await?;
     let address: SocketAddr = format!("{}:{}", app.config.server.host, app.config.server.port)
         .parse()
         .map_err(|error| format!("invalid server address in configuration: {error}"))?;

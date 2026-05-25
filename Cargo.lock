@@ -754,7 +754,18 @@ version = "0.1.0"
 source = "git+ssh://git@github.com/iainh/mp-config-sqlx.git#1dac8eb8faefe67f414af1d0fb42e343503769b7"
 dependencies = [
  "mp-config",
+ "mp-config-sqlx-macros",
  "sqlx",
+]
+
+[[package]]
+name = "mp-config-sqlx-macros"
+version = "0.1.0"
+source = "git+ssh://git@github.com/iainh/mp-config-sqlx.git#1dac8eb8faefe67f414af1d0fb42e343503769b7"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
